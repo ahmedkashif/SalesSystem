@@ -1,0 +1,11 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Admin- Index";
+}
+
+<h2>Admin: Index</h2>
+@Html.ActionLink(linkText: "Product", actionName: "List", controllerName: "Product",routeValues: null, htmlAttributes: null)
+<br/>
+@Html.ActionLink(linkText: "Customers", actionName: "Index", controllerName: "Customer", routeValues: null, htmlAttributes: null)
+

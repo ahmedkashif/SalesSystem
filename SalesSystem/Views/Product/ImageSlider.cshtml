@@ -1,0 +1,66 @@
+﻿@using SalesSystem.Models;
+@model IEnumerable<Image>
+
+<div class="span5">
+    
+    <div id="myCarousel" class="carousel slide cntr">
+        <div class="carousel-inner">
+            @{
+                int index = 0;
+            }
+
+            @foreach (var image in Model)
+            {
+
+                if (index == 0)
+                {
+                    @:<div class="item active">
+                            }
+                else
+                {
+                    @:<div class="item">
+                                }
+
+                <a href="#"> <img src="@Url.Content("~/assets/")/img/@image.FileName" alt="" style="width:100%"></a>
+
+
+                if (index == 0)
+                {
+                    @:</div>
+                            }
+                else
+                {
+                    @:</div>
+                        }
+
+
+                index += 1;
+
+
+            }
+
+        </div>
+
+
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                @if (Model.Count() > 0)
+                {
+                }
+
+   
+</div>

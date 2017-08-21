@@ -1,0 +1,84 @@
+﻿@using SalesSystem.Areas.Admin.Models.ViewModels;
+@using SalesSystem.HtmlHelpers;
+@model CustomerListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Csutomer Listing</h2>
+
+@if (TempData["Message"] != null)
+{
+<p>
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+</p>
+}
+<br/>
+
+<p>
+    @Html.ActionLink(linkText: "Create New", 
+                     actionName: "Create" , 
+                     controllerName: "Customer", 
+                     routeValues: null, 
+                     htmlAttributes: null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Customers.FirstOrDefault().CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Customers.FirstOrDefault().NIC)
+        </th>
+        <th>
+            Gender Type
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Customers)
+    {
+        <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIC)
+        </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenderID)
+            </td>
+        
+            <td>
+                @Html.ActionLink(linkText: "Edit", actionName: "Edit", controllerName: "Customer", routeValues: new { ID = item.ID },  htmlAttributes: null) |
+                @Html.ActionLink(linkText: "Detail", actionName: "Detail", controllerName: "Customer", routeValues: new { ID = item.ID }, htmlAttributes: null) |
+                
+                @using (Html.BeginForm(actionName: "Delete", controllerName: "Customer", method: FormMethod.Post))
+                {                    
+                    @Html.Hidden(name: "id", value: item.ID)
+                    <input type="submit" value="Delete" 
+                           onclick="javascript: return confirm('Do you want to delete this record');" 
+                           class="btn btn-default btn-xs"/>
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+
+@*1 of 2
+0 of 0*@
+
+Page @(Model.pagingInfo.TotalPages < 1 ? 0 : Model.pagingInfo.CurrentPage) of @Model.pagingInfo.TotalPages
+
+<br/>
+<div class="">
+    @Html.PageLinks(Model.pagingInfo, x => Url.Action(actionName: "Index", routeValues: new { Page = x }));
+</div>

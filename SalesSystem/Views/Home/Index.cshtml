@@ -1,0 +1,49 @@
+﻿
+@*@{
+    ViewBag.Title = "Index";
+}*@
+
+
+<div class="span9">
+    @{
+        Html.RenderAction(actionName: "WelcomePanel", controllerName: "Home");
+    }
+    <!--
+    New Products
+    -->
+    @{
+        Html.RenderAction(actionName: "NewProducts", controllerName: "Product");
+    }
+    <!--
+    Featured Products
+    -->
+    @{
+        Html.RenderAction(actionName: "FeaturedProducts", controllerName: "Product");
+    }
+
+    <!--
+    Popular Products
+    -->
+    @{
+        Html.RenderAction(actionName: "PopularProducts", controllerName: "Product");
+    }
+    <hr>
+
+    <!--
+    Best Selling Products
+    -->
+    @{
+        Html.RenderAction(actionName: "BestSellingProducts", controllerName: "Product");
+    }
+
+   
+
+</div>
+
+@{
+    if (true)
+    {
+        Html.RenderAction(actionName: "CartDetails", controllerName: "Cart", routeValues: null);
+    }
+}
+	@*</div>*@

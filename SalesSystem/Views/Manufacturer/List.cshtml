@@ -1,0 +1,23 @@
+﻿@using SalesSystem.Models;
+@model IEnumerable<Manufacturer>
+
+<div class="well well-small">
+    <ul class="nav navbar-toggle">
+        @foreach (var manufacturer in Model)
+        {   
+            <li>
+                <span class="icon-chevron-right">
+
+                  @Html.RouteLink(linkText: manufacturer.Name,
+                  routeValues: new
+                  {
+                      controller = "Category",
+                      action = "MenuListBy",                      
+                      manufacturerID = manufacturer.ID
+                  }, htmlAttributes: null)
+
+                </span>
+            </li>
+        }        
+    </ul>
+</div>

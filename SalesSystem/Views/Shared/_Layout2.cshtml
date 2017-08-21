@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <!-- shopping cart-->
+    <title>@ViewBag.Title </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap styles -->
+    <link href="@Url.Content("~/assets/")css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Customize styles -->
+    <link href="@Url.Content("~/Content/")style.css" rel="stylesheet"/>
+    <!-- font awesome styles -->
+	<link href="@Url.Content("~/assets/")font-awesome/css/font-awesome.css" rel="stylesheet">
+
+     <link href="@Url.Content("~/assets/")css/jquery-ui.min.css" rel="stylesheet" />
+
+      @*<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all">*@
+
+      @*<link href="@Url.Content("~/assets/")css/rangeslider.css" rel="stylesheet" />*@
+
+      <script type="text/javascript" src="@Url.Content("~/assets/")js/jquery-1.10.2.min.js"></script>
+
+      <script type="text/javascript" src="@Url.Content("~/assets/")js/jquery-ui.1.11.4.min.js"></script>
+
+      
+     
+
+      @*<script type="text/javascript" src="@Url.Content("~/assets/")js/rangeslider.min.js"></script>*@
+
+     
+		<!--[if IE 7]>
+			<link href="css/font-awesome-ie7.min.css" rel="stylesheet">
+		<![endif]-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	<!-- Favicons -->
+    <link rel="shortcut icon" href="@Url.Content("~/assets/")/ico/favicon.ico">
+  </head>
+<body>
+<!-- 
+	Upper Header Section 
+-->
+
+
+    @{
+        Html.RenderAction(actionName: "CartHeader", controllerName: "Cart");
+    }
+
+<!--
+Lower Header Section 
+-->
+<div class="container">
+<div id="gototop"> </div>
+
+
+    @{
+        Html.RenderAction(actionName: "LowerHeader", controllerName: "Home");
+    }
+
+<!--
+Navigation Bar Section
+-->
+
+@{
+    Html.RenderAction(actionName: "NavigationBar", controllerName: "Home");
+}
+
+    <!--
+    Booking Options
+    -->
+
+
+    @{
+        Html.RenderAction(actionName: "BookingOptions", controllerName: "Home");
+    }
+
+
+<!-- 
+Body Section 
+-->
+	<div class="row">
+        <div id="sidebar" class="span3">
+
+            <!-- Booking Options  -->
+
+            @*@{
+                Html.RenderPartial("BookingOptions");
+            }*@
+
+            <!-- Categories  -->
+
+            @{
+                Html.RenderAction(actionName: "Menus", controllerName: "Category");
+            }
+
+            <!-- Manufacturers -->
+
+            @*@{
+                Html.RenderAction(actionName: "List", controllerName: "Manufacturer");
+            }*@
+
+
+            <div class="well well-small alert alert-warning cntr">
+                <h2>50% Discount</h2>
+                <p>
+                    only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
+                </p>
+            </div>           
+
+            <div class="well well-small">
+                <a href="#">
+                <img src="@Url.Content("~/assets/")img/paypal.jpg" alt="payment method paypal">
+                </a>
+            </div>
+
+            <a class="shopBtn btn-block" href="#">Upcoming products <br><small>Click to view</small></a>
+            <br>
+            <br>
+
+            @{
+                Html.RenderAction(actionName: "TopPurchasedProductsByCategory", controllerName: "Product");
+            }
+
+        </div>
+
+    @RenderBody()
+   </div>
+
+        <!--
+    Clients
+    -->
+
+        @{
+            Html.RenderAction(actionName: "List", controllerName: "Client");
+        }
+<!--
+Footer
+-->
+    @{
+        Html.RenderAction(actionName: "Footer", controllerName: "Home");
+    }
+
+</div><!-- /container -->
+
+    <!-- 
+        copyright 
+    -->
+
+    @{
+        Html.RenderAction(actionName: "Copyright", controllerName: "Home");
+    }
+
+<a hre="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+    <!-- Placed at the end of the document so the pages load faster -->
+    @*<script src="@Url.Content("~/assets/")js/jquery.js"></script>*@
+
+	<script src="@Url.Content("~/assets/")js/bootstrap.min.js"></script>
+	<script src="@Url.Content("~/assets/")js/jquery.easing-1.3.min.js"></script>
+    <script src="@Url.Content("~/assets/")js/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script src="@Url.Content("~/assets/")js/shop.js"></script>
+  </body>
+</html>

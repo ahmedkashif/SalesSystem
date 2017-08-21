@@ -1,0 +1,33 @@
+﻿@using SalesSystem.Models;
+@model IEnumerable<Category>
+
+<div class="well well-small">
+    <ul class="nav navbar-toggle">
+        @foreach (var category in Model)
+        {
+          <li>  
+              <span class="icon-chevron-right">
+
+                  @Html.RouteLink(linkText: category.Name,
+         routeValues: new
+         {
+             controller = "Manufacturer",
+             action = "ManufacturerListByCategoryID",
+             categoryID = category.ID
+         }, htmlAttributes: null)
+
+              </span></li>
+        }
+      
+        <li style="border:0"> &nbsp;</li>
+        <li> <a class="totalInCart" href="cart.html">
+            <strong>
+                Total Amount  
+            <span class="badge badge-warning pull-right" style="line-height:18px;">
+                $448.42
+            </span>
+            </strong>
+            </a>
+        </li>
+    </ul>
+</div>

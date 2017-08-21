@@ -1,0 +1,72 @@
+﻿@using SalesSystem.Models;
+@model IEnumerable<Product>
+
+<div class="span9">
+    <!--
+    New Products
+    -->
+    <div class="well well-small">
+        <h3>Our Products </h3>
+        @{
+            var productCount = Model.Count();
+            int counter = 1;
+            int noOfRecordsPerRow = 3;            
+        }
+
+        <!--<div class="row-fluid">
+            <ul class="thumbnails">
+            -->
+
+        @foreach (var product in Model)
+        {
+            if ((counter % noOfRecordsPerRow) == 1)
+            {
+                @:<div class="row-fluid">
+                    @:<ul class="thumbnails">
+            }
+
+            <li class="span4">
+
+                <div class="thumbnail">
+                    <a href="product_details.html" class="overlay"></a>
+                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <a href="product_details.html"><img src="@Url.Content("~/assets/")img/a.jpg" alt=""></a>
+                    @Html.RouteLink(linkText: product.Name, routeValues: new {
+                        controller = "Product",
+                        action = "Details",
+                        productID = product.ID
+                        }, htmlAttributes: null)
+                    <div class="caption cntr">
+                        <p>@product.Name</p>
+                        <p><strong> $@product.Rate</strong></p>
+                        <h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+                        <div class="actionList">
+                            <a class="pull-left" href="#">Add to Wish List </a>
+                            <a class="pull-left" href="#"> Add to Compare </a>
+                        </div>
+                        <br class="clr">
+                    </div>
+                </div>
+
+            </li>
+
+            if ((counter % noOfRecordsPerRow) == 0)
+            {
+                @:</ul>
+                @:</div>
+            }
+
+            counter++;
+        }
+
+        @if (Model.Count() % 3 != 0)
+        {
+            @:</ul>
+            @:</div>
+        }
+
+    </div>
+
+
+
+</div>

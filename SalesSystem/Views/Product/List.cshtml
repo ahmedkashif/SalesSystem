@@ -1,0 +1,29 @@
+﻿@using SalesSystem.Models;
+@model IEnumerable<Manufacturer>
+
+@{
+    //ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+@foreach (var manufacturer in Model)
+{
+
+    <div class="span9">
+        <div class="well well-small">
+
+            <div class="span12">
+                <h4>@manufacturer.Name</h4>
+            </div>
+
+            
+            @{ 
+                Html.RenderAction(actionName: "ProductView",
+                               controllerName: "Product",
+                               routeValues: new { categoryID = TempData["categoryID"], manufacturerID = @manufacturer.ID });
+            }
+
+        </div>
+    </div>
+ }

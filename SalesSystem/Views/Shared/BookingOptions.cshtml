@@ -1,0 +1,104 @@
+﻿<script tyoe="text/javascript">
+
+
+    $(document).ready(function () {
+
+        var s = $("#slider");
+        var bookingDate = $("#bookingDate");
+        var btnminus = $("#btnminus");
+        var btnplus = $("#btnplus");
+        var hdnGuests = $("#hdnGuests");
+
+
+        s.slider({
+            min: 50,
+            max: 5000,
+            step: 5,
+
+            slide: function (event, ui) {
+                DisplayGuests(ui.value);
+            },
+
+            stop: function (event, ui) {
+                DisplayGuests(ui.value);
+            }
+        });
+
+        bookingDate.datepicker({
+            showOn: 'both',
+            dateFormat: 'dd/mm/yy',
+            minDate: new Date(),
+            changeMonth: true,
+            changeYear: true
+        });
+
+        btnminus.click(function () {
+            //    debugger;
+            var slideValue = hdnGuests.value - 1;
+
+            UpdateSlider(slideValue);
+        });
+
+        btnplus.click(function () {
+
+            var slideValue = hdnGuests.value + 1;
+
+            UpdateSlider(slideValue);
+        });
+
+        DisplayGuests(s.slider("values", 0));
+
+        function UpdateSlider(slideValue) {
+
+            s.slider("value", slideValue);
+            DisplayGuests(slideValue);
+        }
+
+
+        function DisplayGuests(min) {
+
+            var OutputSpan = $("#spanOutput");
+
+            OutputSpan.html(min + '  peoples');
+            hdnGuests.value = min;
+        }
+
+    });
+
+</script>
+
+<div class="nav controls row">
+    
+    
+            <div id="sidebar" class="span6" style="margin-left:-1px !important; margin-top:1px !important">
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="6">
+                                Booking Options
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label id="lblmin" readonly="readonly" value="50" style="margin-top:1px !important">50</label></td>
+                            <td><input id="btnminus" type="button" value="-" class="btn btn-warning btn-mini" style="margin-top:3px !important"></td>
+                            <td><div id="slider" style="width:460px !important;margin-left:7px !important; margin-top:8px !important; margin-bottom:auto;"></div></td>
+                            <td><label id="lblmax" class="control-label" readonly="readonly" value="5000" style="margin-top:1px !important">5000</label></td>
+                            <td><input id="btnplus" type="button" value="+" class="btn btn-warning btn-mini" style="margin-top:1px !important"></td>
+                            <td>
+                                <span id="spanOutput">
+                                </span>
+                                <input type="hidden" id="hdnGuests" />
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+
+    
+</div>

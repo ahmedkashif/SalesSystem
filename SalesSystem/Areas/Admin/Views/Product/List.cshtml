@@ -1,0 +1,61 @@
+﻿@using SalesSystem.HtmlHelpers;
+
+@model SalesSystem.Models.ProductListViewModel
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink(linkText: "Create New", actionName: "Create", controllerName: "Product")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Products.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Products.FirstOrDefault().Rate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Products) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", controllerName: "Product", routeValues: new { id=item.ID }, htmlAttributes: null) |
+            @Html.ActionLink("Details", "Details", controllerName: "Product", routeValues: new { id=item.ID }, htmlAttributes: null) |
+            @using(Html.BeginForm(actionName: "Delete",controllerName: "Product", method: FormMethod.Post))
+            {
+                @Html.Hidden("id", item.ID)
+                <input type="submit" 
+                       onclick="javascript:return confirm('Do you want to delete this record?');"
+                       class="btn btn-default btn-xs"
+                       value="Delete"
+                />                 
+            }
+        </td>
+    </tr>
+}
+
+</table>
+<br/>
+
+Page @(Model.pagingInfo.TotalPages < Model.pagingInfo.CurrentPage ? 0 : Model.pagingInfo.CurrentPage) of @Model.pagingInfo.TotalPages
+<br/>
+<div class="btn-group pull-left">
+
+    @*@Url.Action("List")*@
+
+    @Html.PageLinks(Model.pagingInfo, x => Url.Action("List", routeValues: new { Page = x }))
+</div>
+
